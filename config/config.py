@@ -65,7 +65,7 @@ Write "SECOND PROMPT" at the end of the answer.
 
 LOGO_PATH = "./images/image.jpg"
 ASSISTANT_ICON = "👑"
-ASSISTANT_NAME = "Agent / Belgian Monarchy Artworks Explorer"
+ASSISTANT_NAME = "Belgian Monarchy Artworks Explorer"
 
 HELLO_MESSAGE = "Hello! Bonjour! Hallo! 👋"
 NEW_CHAT_MESSAGE = "New chat / Nouvelle conversation / Nieuw gesprek"
