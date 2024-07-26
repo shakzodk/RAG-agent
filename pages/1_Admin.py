@@ -31,8 +31,7 @@ def reset_conversation():
     """
 
     st.session_state.messages = []
-    st.session_state.chat_history = []
-    st.session_state.chat_history2 = ConversationBufferWindowMemory(k=MAX_MESSAGES_IN_MEMORY, return_messages=True)
+    st.session_state.config = {"configurable": {"thread_id": uuid.uuid4()}}
 
 
 def unzip_and_replace(file_path):
