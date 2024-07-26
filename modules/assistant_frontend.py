@@ -48,7 +48,7 @@ def assistant_frontend():
     if "input_password" not in st.session_state:
         st.session_state.input_password = ""
 
-    # Load, index, retrieve and generate
+    # Retrieve and generate
 
     ai_assistant_graph_agent = instanciate_ai_assistant_graph_agent(st.session_state.model, st.session_state.temperature)
 
