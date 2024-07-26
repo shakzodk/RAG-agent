@@ -10,3 +10,4 @@ nohup.out
 chroma.log
 blobfuse.yaml
 blobfusetmp/*
+graph.txt

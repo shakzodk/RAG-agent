@@ -52,6 +52,11 @@ def assistant_frontend():
 
     ai_assistant_graph_agent = instanciate_ai_assistant_graph_agent(st.session_state.model, st.session_state.temperature)
 
+    # Write the mermaid graph in the graph.txt file (to be displayed in https://mermaid.live/)
+    with open("graph.txt", "w") as f:
+        f.write(ai_assistant_graph_agent.get_graph().draw_mermaid())    
+    f.close()
+
     # # # # # # # #
     # Main window #
     # # # # # # # #
