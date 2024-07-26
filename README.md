@@ -382,7 +382,6 @@ sudo apt-get install libfuse3-dev fuse3 blobfuse2
 ### Configure blobfuse2
 
 ```
-mkdir blobfusetmp
 mkdir files
 ```
 ```
@@ -421,7 +420,7 @@ azstorage:
   container: bmae-ragai-blobcontainer
 ```
 ```
-chmod 600 blobfuse.cfg
+chmod 600 blobfuse.yaml
 ```
 
 The parameters you have to adapt are:
@@ -441,7 +440,7 @@ blobfuse2 mount ./files --config-file=./blobfuse.yaml
 ```
 or
 ```
-bash fuse<sh
+bash fuse.sh
 ```
 
 ### Logs
