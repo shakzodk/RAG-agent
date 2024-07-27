@@ -15,7 +15,7 @@ This application can be configured (see config.py) to create your own specialize
 - AI Python framework: Langchain and Langgraph
 - Web interface Python framework: Streamlit
 - Vector DB: Chroma (can run locally or on a remote server)
-- Tool n° 1: Hybrid RAG: bm25 keyword search and vector db semantic search (BM25Retriever + vector_db.as_retriever = EnsembleRetriever). Hybrid RAG improves greatly the efficiency of the RAG search.
+- Tool n° 1: Hybrid RAG: bm25 keyword search and vector db semantic search. Hybrid RAG improves greatly the efficiency of the RAG search.
 - Tool n° 2: Web search (Tavily)
 - Chat history
 - Logs sent to Langsmith
