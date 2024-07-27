@@ -144,5 +144,5 @@ FRANCAIS:
 
 SIDEBAR_FOOTER = """
 _________
-Hybrid RAG agent with memory powered by Langchain and Langgraph. Web interface powered by Streamlit. *(c) Eric Dodémont, 2024.* Github: https://github.com/dodeeric/langchain-ai-assistant-with-hybrid-rag (Ragai)
+Hybrid RAG agent with memory powered by Langchain and Langgraph. Web interface powered by Streamlit. *(c) Eric Dodémont, 2024.* Github: https://github.com/dodeeric/ragai-agent (Ragai Agent)
 """
