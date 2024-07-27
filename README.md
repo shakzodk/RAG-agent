@@ -1,6 +1,14 @@
-# Ragai Agent: a Langchain/Langraph AI Agent with Hybrid RAG
+# Ragai Agent
+
+## Introduction 
+
+This is a Langchain/Langraph AI Agent with Hybrid RAG and Web search.
 
 This application can be configured (see config.py) to create your own specialized AI agent.
+
+## Agent graph
+
+![Ragai Agent](https://github.com/dodeeric/ragai-agent/blob/main/images/ragai-agent.jpg)
 
 ## Features
 
