@@ -2,7 +2,7 @@
 
 ## Introduction 
 
-This is a Langchain/Langraph AI Agent with Hybrid RAG and Web search.
+This is a AI chatbot coded with Langchain and Langraph. The web interface is coded with Streamlit. It implements an AI react agent with a hybrid RAG (keyword and semantic search) and web search.
 
 This application can be configured (see config.py) to create your own specialized AI agent.
 
