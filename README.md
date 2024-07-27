@@ -1,4 +1,4 @@
-# RagAiAgent: Langchain/Langraph AI Agent with Hybrid RAG
+# Ragai Agent: a Langchain/Langraph AI Agent with Hybrid RAG
 
 This application can be configured (see config.py) to create your own specialized AI agent.
 
@@ -8,19 +8,19 @@ This application can be configured (see config.py) to create your own specialize
 - Web interface Python framework: Streamlit
 - Vector DB: Chroma (can run locally or on a remote server)
 - Tool n° 1: Hybrid RAG: bm25 keyword search and vector db semantic search (BM25Retriever + vector_db.as_retriever = EnsembleRetriever). Hybrid RAG improves greatly the efficiency of the RAG search.
-- Tool n° 2: Web search
+- Tool n° 2: Web search (Tavily)
 - Chat history
 - Logs sent to Langsmith
 - AI Models: OpenAI GPT 4o, Google Gemini 1.5, Anthropic Claude 3.5, Ollama (Llama 3, etc.). Vector size: 3072.
 - Admin interface: scrape web pages, upload PDF files, embed in vector DB, change model, etc.
 - Files ingestion into the vector DB: JSON files (one JSON item / web page per chunk) and PDF files (one PDF page per chunk)
 - Fully customisable with parameters in the config.py configuration file.
-- Multilanguage RAG (knowlege base with data in different languages).
  
 ## Frameworks and tools
 
-- Langchain & Langraph: https://www.langchain.com (Python framework for AI applications)
-- Langsmith: https://smith.langchain.com (logs and debug for Langchain applications)
+- Langchain: https://www.langchain.com (Python framework for AI applications)
+- Langgraph: https://www.langchain.com/langgraph (Python framework for AI applications)
+- Langsmith: https://smith.langchain.com (logs and debug for Langchain and Langgraph applications)
 - Streamlit: https://streamlit.io (Python framework for web interfaces for data / AI applications)
 - Chroma: https://www.trychroma.com (Vector DB)
 - Chromadb Admin: https://github.com/flanker/chromadb-admin (Web admin interface for Chroma)
@@ -39,8 +39,8 @@ Demo: https://bmae.edocloud.be (running the app, the db, and a reverse proxy on 
 Requirements: Python 3.10+
 
 ```
-$ git clone https://github.com/dodeeric/langchain-ai-assistant-with-hybrid-rag.git
-$ cd langchain-ai-assistant-with-hybrid-rag
+$ git clone https://github.com/dodeeric/ragai-agent
+$ cd ragai-agent
 ```
 
 Add your API keys (only the OpenAI API key is mandatory) and admin password:
@@ -55,11 +55,11 @@ ANTHROPIC_API_KEY = "sk-ant-xxx"     ==> Go to https://console.anthropic.com/set
 GOOGLE_API_KEY = "xxx"               ==> Go to https://aistudio.google.com/app/apikey
 LANGCHAIN_API_KEY = "ls__xxx"        ==> Go to https://smith.langchain.com (Langsmith)
 LANGCHAIN_TRACING_V2 = "true"        ==> Set to false if you will not use Langsmith traces
+TAVILY_API_KEY = "tvly-xxx"          ==> Go to https://app.tavily.com/home
 ADMIN_PASSWORD = "xxx"               ==> You chose your password
 GOOGLE_APPLICATION_CREDENTIALS = "./serviceaccountxxx.json"  ==> Path to the Service Account (with VertexAI role) JSON file
-CHROMA_SERVER_AUTHN_CREDENTIALS ="xxx"   ==> You chose the password for the Chroma DB authentication
+CHROMA_SERVER_AUTHN_CREDENTIALS ="xxx"                       ==> You chose the password for the Chroma DB authentication
 CHROMA_SERVER_AUTHN_PROVIDER="chromadb.auth.token_authn.TokenAuthenticationServerProvider"
-TAVILY_API_KEY = "tvly-xxx"          ==> Go to https://app.tavily.com/home
 ```
 
 Configure the application:
@@ -88,7 +88,7 @@ $ bash app.sh start
 
 Remark: if you get the "streamlit: command not found" error, then log off, then log in, to have the PATH updated.
 
-Go to: http://IP:8080 (the IP is displayed on the screen in the "External URL".)
+Go to: http://IP:8080
 
 Go first to the admin interface (introduce the admin password), and scrape some web pages and/or upload some PDF files, then embed them to the vector DB.
 
@@ -222,7 +222,7 @@ $ sudo systemctl status ollama
 
 You can deploy directly from Github repository to Streamlit Community cloud.
 
-Demo: https://bmae-ai-assistant.streamlit.app (running the app)
+Demo: https://bmae-ragai-agent.streamlit.app (running the app)
 
 ## Procedure to install the application on Azure Web App service
 
