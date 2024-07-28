@@ -7,7 +7,6 @@ This subpage runs the admin web interface.
 """
 
 import streamlit as st
-from langchain.memory import ConversationBufferWindowMemory
 import os
 import zipfile
 import subprocess
