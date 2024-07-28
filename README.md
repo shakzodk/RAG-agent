@@ -18,6 +18,7 @@ This application can be configured (see config.py) to create your own specialize
 - Tool n° 1: Hybrid RAG: bm25 keyword search and vector db semantic search. Hybrid RAG improves greatly the efficiency of the RAG search.
 - Tool n° 2: Web search (Tavily)
 - Chat history
+- Streaming of the answer
 - Logs sent to Langsmith
 - AI Models: OpenAI GPT 4o, Google Gemini 1.5, Anthropic Claude 3.5, Ollama (Llama 3, etc.). Vector size: 3072.
 - Admin interface: scrape web pages, upload PDF files, embed in vector DB, change model, etc.
