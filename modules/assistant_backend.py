@@ -26,7 +26,8 @@ import os
 from langchain.tools.retriever import create_retriever_tool
 from langchain_community.tools.tavily_search import TavilySearchResults
 from langgraph.prebuilt import create_react_agent
-from langgraph.checkpoint.sqlite import SqliteSaver
+#from langgraph.checkpoint.sqlite import SqliteSaver  # on disk checkpointer (memory)
+from langgraph.checkpoint import MemorySaver  # an in-memory checkpointer (memory)
 
 from config.config import *
 
@@ -114,7 +115,8 @@ def instanciate_ai_assistant_graph_agent(model, temperature):
 
         tools = [search, rag]
 
-        memory = SqliteSaver.from_conn_string(":memory:")
+        #memory = SqliteSaver.from_conn_string(":memory:")
+        memory = MemorySaver()
 
         ai_assistant_graph_agent = create_react_agent(model=llm, tools=tools, checkpointer=memory, messages_modifier=SYSTEM_PROMPT)
 

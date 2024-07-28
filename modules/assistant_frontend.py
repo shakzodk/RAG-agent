@@ -9,6 +9,7 @@ This function runs the frontend web interface.
 import streamlit as st
 from langchain_core.messages.human import HumanMessage
 import uuid
+import asyncio
 
 from modules.assistant_backend import instanciate_ai_assistant_graph_agent
 from config.config import *
@@ -21,7 +22,7 @@ def reset_conversation():
     """
 
     st.session_state.messages = []
-    st.session_state.config = {"configurable": {"thread_id": uuid.uuid4()}}
+    st.session_state.threadId = {"configurable": {"thread_id": uuid.uuid4()}}
 
 
 def assistant_frontend():
@@ -34,7 +35,7 @@ def assistant_frontend():
     # Initialize chat history (messages) for Streamlit and Langgraph (thread_id)
     if "messages" not in st.session_state:
         st.session_state.messages = []
-        st.session_state.config = {"configurable": {"thread_id": uuid.uuid4()}}
+        st.session_state.threadId = {"configurable": {"thread_id": uuid.uuid4()}}
 
     if "model" not in st.session_state:
         st.session_state.model = DEFAULT_MODEL
@@ -98,10 +99,34 @@ def assistant_frontend():
         try:
 
             # Call the agent
-            answer_container = st.empty()
-            response = ai_assistant_graph_agent.invoke({"messages": [HumanMessage(content=question)]}, config=st.session_state.config)
-            answer = response["messages"][-1].content
-            answer_container.write(answer)
+
+            # Without streaming the answer
+
+            #answer_container = st.empty()        
+            #response = ai_assistant_graph_agent.invoke({"messages": [HumanMessage(content=question)]}, config=st.session_state.threadId)
+            #answer = response["messages"][-1].content
+            #answer_container.write(answer)
+
+            # With streaming the answer
+            
+            async def agent_answer(question):
+                # invoke (sync) --> stream (sync stream invoke) --> astream_events (async stream invoke)
+                answer = ""
+                answer_container = st.empty()
+                async for event in ai_assistant_graph_agent.astream_events({"messages": [HumanMessage(content=question)]}, config=st.session_state.threadId, version="v2"):
+                    kind = event["event"]
+                    if kind == "on_chat_model_stream":
+                        answer_token = event["data"]["chunk"].content
+                        if answer_token:
+                            answer = answer + answer_token
+                            answer_container.write(answer)
+                return(answer)
+
+            async def call_agent_answer(question):
+                answer = await agent_answer(question)
+                return(answer)
+
+            answer = asyncio.run(call_agent_answer(question))
 
         except Exception as e:
             st.write("Error: Cannot invoke/stream the agent!")
