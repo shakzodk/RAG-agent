@@ -17,7 +17,7 @@ VERTEXAI_MENU = "Google (VertexAI) / Gemini"
 OLLAMA_MENU = "MetaAI (Ollama) / Llama"
 
 DEFAULT_MODEL = OPENAI_MENU  # One of the model menu choices
-DEFAULT_MENU_CHOICE = 0  # OpenAI: 0, Anthropic: 1, etc.)
+DEFAULT_MENU_CHOICE = 0  # OpenAI: 0, Anthropic: 1, Google: 2, Google/VertexAI: 3, MetaAI/Ollama: 4
 DEFAULT_TEMPERATURE = 0.2  # OpenAI: 0-2, Anthropic: 0-1
 
 VECTORDB_MAX_RESULTS = 5
