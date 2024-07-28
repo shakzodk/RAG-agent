@@ -8,7 +8,7 @@ OPENAI_MODEL = "gpt-4o-mini"
 ANTHROPIC_MODEL = "claude-3-5-sonnet-20240620"  # "claude-3-opus-20240229"
 GOOGLE_MODEL = "gemini-1.5-pro"
 VERTEXAI_MODEL = "gemini-1.5-pro"  # "gemini-1.5-pro-preview-0409"
-OLLAMA_MODEL = "llama3"
+OLLAMA_MODEL = "llama3.1"
 
 OPENAI_MENU = "OpenAI / GPT"
 ANTHROPIC_MENU = "Anthropic / Claude"
