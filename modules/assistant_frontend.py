@@ -100,33 +100,40 @@ def assistant_frontend():
 
             # Call the agent
 
-            # Without streaming the answer
+            if st.session_state.model == ANTHROPIC_MENU:
 
-            #answer_container = st.empty()        
-            #response = ai_assistant_graph_agent.invoke({"messages": [HumanMessage(content=question)]}, config=st.session_state.threadId)
-            #answer = response["messages"][-1].content
-            #answer_container.write(answer)
+                # Without streaming the answer (exception because there is a bug in anthropic async)
 
-            # With streaming the answer
-            
-            async def agent_answer(question):
-                # invoke (sync) --> stream (sync stream invoke) --> astream_events (async stream invoke)
-                answer = ""
-                answer_container = st.empty()
-                async for event in ai_assistant_graph_agent.astream_events({"messages": [HumanMessage(content=question)]}, config=st.session_state.threadId, version="v2"):
-                    kind = event["event"]
-                    if kind == "on_chat_model_stream":
-                        answer_token = event["data"]["chunk"].content
-                        if answer_token:
-                            answer = answer + answer_token
-                            answer_container.write(answer)
-                return(answer)
+                # Anthropic: if streaming (async / events), the answer is a list of 
+                # dictionaries (NOK), in place of a string (OK).
 
-            async def call_agent_answer(question):
-                answer = await agent_answer(question)
-                return(answer)
+                answer_container = st.empty()        
+                response = ai_assistant_graph_agent.invoke({"messages": [HumanMessage(content=question)]}, config=st.session_state.threadId)
+                answer = response["messages"][-1].content
+                answer_container.write(answer)
 
-            answer = asyncio.run(call_agent_answer(question))
+            else:
+
+                # With streaming the answer
+                
+                async def agent_answer(question):
+                    # invoke (sync) --> stream (sync stream invoke) --> astream_events (async stream invoke)
+                    answer = ""
+                    answer_container = st.empty()
+                    async for event in ai_assistant_graph_agent.astream_events({"messages": [HumanMessage(content=question)]}, config=st.session_state.threadId, version="v2"):
+                        kind = event["event"]
+                        if kind == "on_chat_model_stream":
+                            answer_token = event["data"]["chunk"].content
+                            if answer_token:
+                                answer = answer + answer_token
+                                answer_container.write(answer)
+                    return(answer)
+
+                async def call_agent_answer(question):
+                    answer = await agent_answer(question)
+                    return(answer)
+
+                answer = asyncio.run(call_agent_answer(question))
 
         except Exception as e:
             st.write("Error: Cannot invoke/stream the agent!")
